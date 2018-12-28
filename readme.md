@@ -18,8 +18,9 @@ Open crosh (press Ctrl+Alt+T anywhere in Chrome OS) and start _termina_ virtual 
 
 ```bash
 CONTAINER_NAME=${container name} IMAGE=${turnkey image file name} && \
+run_container.sh --container_name turnkey-helper && \
 while ! (lxc exec turnkey-helper curl ifconfig.co &> /dev/null); \
-do run_container.sh --container_name turnkey-helper; done && \
+do echo 'Waiting for turnkey-helper...'; sleep 1; done && \
 lxc exec turnkey-helper -- sh -c \
     "curl https://raw.githubusercontent.com/flenny/turnkey-crostini/master/setup.sh > setup.sh && \
      chmod +x setup.sh && IMAGE=$IMAGE CONTAINER_NAME=$CONTAINER_NAME ./setup.sh" && \

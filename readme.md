@@ -36,11 +36,15 @@ lxc exec $CONTAINER_NAME turnkey-init
 :warning: Please note that an already existing container with the same name gets automatically deleted by the script. Otherwise the new container cannot be deployed.
 
 ## FAQ
-What is the default root password?\
+* What is the default root password?\
 _Type `lxc exec ${container name} passwd` to set a password for root._
 
-How can I connect to the TurnKey container?\
+* How can I connect to the TurnKey container?\
 _Type `lxc exec ${container name} bash` or navigate to the containers IP address to use a web based shell. Type `lxc list` in termina to get container IP addresses._
 
-I missed the TurnKey Linux first boot configuration. How can I run the script manually?\
+* I missed the TurnKey Linux first boot configuration. How can I run the script manually?\
 _Type `lxc exec ${container name} turnkey-init`._
+
+## Screenshot
+
+![TurnKey Linux Apps](assets/turnkey-apps.png)

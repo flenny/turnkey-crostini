@@ -1,10 +1,10 @@
 # turnkey-crostini
 
-Run [TurnKey Linux](https://www.turnkeylinux.org/) container images in ChromeOS Crostini Linux.
+Run [TurnKey Linux](https://www.turnkeylinux.org/) container images in Chrome OS Crostini Linux.
 
 TurnKey Linux offers a bunch of free and open source Debian-based pre-packaged ready-to-use server software appliances.
 
-[turnkey-crostini](https://github.com/flenny/turnkey-crostini) uses the generic container format which is specifically packaged for [Proxmox](https://www.proxmox.com/en/). By the means of a helper container _turnkey-crostini_ creates a Crostini compatible image which gets imported and deployed to the ChromeOS _termina_ virtual machine.
+[turnkey-crostini](https://github.com/flenny/turnkey-crostini) uses the generic container format which is specifically packaged for [Proxmox](https://www.proxmox.com/en/). By the means of a helper container _turnkey-crostini_ creates a Crostini compatible image which gets imported and deployed to the Chrome OS _termina_ virtual machine.
 
 ## Getting started
 
@@ -14,7 +14,7 @@ e.g. `CONTAINER_NAME=rails IMAGE=debian-8-turnkey-rails_14.2-1_amd64.tar.gz`
 
 Open crosh (press Ctrl+Alt+T anywhere in Chrome OS) and start _termina_ virtual machine `vmc start termina`.
 
-:bulb: I do recommend using a seperate _termina_ virtual machine and leave the ChromeOS _termina_/penguin instance untouched to prevent unwanted damage to the ChromeOS Crostini Linux integration. For example type `vmc start dev` to create a new VM or `vsh dev` to connect to an already existing/running VM.
+:bulb: I do recommend using a separate _termina_ virtual machine and leave the Chrome OS _termina_/penguin instance untouched to prevent unwanted damage to the Chrome OS Crostini Linux integration. For example type `vmc start dev` to create a new VM or `vsh dev` to connect to an already existing/running VM.
 
 ```bash
 CONTAINER_NAME=${container name} IMAGE=${turnkey image file name} && \
@@ -41,7 +41,7 @@ lxc exec $CONTAINER_NAME turnkey-init
 _Type `lxc exec ${container name} passwd` to set a password for root._
 
 * How can I connect to the TurnKey container?\
-_Type `lxc exec ${container name} bash` or navigate to the containers IP address to use a web based shell. Type `lxc list` in termina to get container IP addresses._
+_Type `lxc exec ${container name} bash` or navigate to the containers IP address to use a web-based shell. Type `lxc list` in termina to get container IP addresses._
 
 * I missed the TurnKey Linux first boot configuration. How can I run the script manually?\
 _Type `lxc exec ${container name} turnkey-init`._

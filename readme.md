@@ -8,24 +8,22 @@ TurnKey Linux offers a bunch of free and open source Debian-based pre-packaged r
 
 ## Getting started
 
-Choose among a variety TurnKey Linux container images [here](http://mirror.turnkeylinux.org/turnkeylinux/images/proxmox/) and use the file name along with a desired container name in the command below.
-
-e.g. `CONTAINER_NAME=rails IMAGE=debian-8-turnkey-rails_14.2-1_amd64.tar.gz`
+Choose among a variety TurnKey Linux container images [here](http://mirror.turnkeylinux.org/turnkeylinux/images/proxmox/) and provide the file name along with a desired container name when executing the command below.
 
 Open crosh (press Ctrl+Alt+T anywhere in Chrome OS) and start _termina_ virtual machine `vmc start termina`.
 
 :bulb: I do recommend using a separate _termina_ virtual machine and leave the Chrome OS _termina_/penguin instance untouched to prevent unwanted damage to the Chrome OS Crostini Linux integration. For example type `vmc start dev` to create a new VM or `vsh dev` to connect to an already existing/running VM.
 
 ```bash
-CONTAINER_NAME=${container name} IMAGE=${turnkey image file name} && \
 run_container.sh --container_name turnkey-helper && \
 while ! (lxc exec turnkey-helper curl ifconfig.co &> /dev/null); \
-do echo 'Waiting for turnkey-helper...'; sleep 1; done && \
+do echo 'Waiting for turnkey-helper...'; sleep 2; done && \
 lxc exec turnkey-helper -- sh -c \
     "curl https://raw.githubusercontent.com/flenny/turnkey-crostini/master/setup.sh > setup.sh && \
-     chmod +x setup.sh && IMAGE=$IMAGE CONTAINER_NAME=$CONTAINER_NAME ./setup.sh" && \
+     chmod +x setup.sh && ./setup.sh" && \
 lxc file pull turnkey-helper/root/rootfs.tar.gz /tmp && \
 lxc file pull turnkey-helper/root/metadata.tar.gz /tmp && \
+lxc file pull turnkey-helper/root/container_name /tmp && CONTAINER_NAME=$(cat /tmp/container_name) && \
 lxc image import /tmp/metadata.tar.gz /tmp/rootfs.tar.gz --alias turnkey-$CONTAINER_NAME && \
 lxc delete --force $CONTAINER_NAME &> /dev/null; \
 lxc launch turnkey-$CONTAINER_NAME $CONTAINER_NAME && \

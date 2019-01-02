@@ -18,9 +18,8 @@ Open crosh (press Ctrl+Alt+T anywhere in Chrome OS) and start _termina_ virtual 
 run_container.sh --container_name turnkey-helper && \
 while ! (lxc exec turnkey-helper curl ifconfig.co &> /dev/null); \
 do echo 'Waiting for turnkey-helper...'; sleep 2; done && \
-lxc exec turnkey-helper -- sh -c \
-    "curl https://raw.githubusercontent.com/flenny/turnkey-crostini/master/setup.sh > setup.sh && \
-     chmod +x setup.sh && ./setup.sh" && \
+lxc exec turnkey-helper -- bash -c \
+  "bash <(curl https://raw.githubusercontent.com/flenny/turnkey-crostini/master/setup.sh)" && \
 lxc file pull turnkey-helper/root/rootfs.tar.gz /tmp && \
 lxc file pull turnkey-helper/root/metadata.tar.gz /tmp && \
 lxc file pull turnkey-helper/root/container_name /tmp && CONTAINER_NAME=$(cat /tmp/container_name) && \

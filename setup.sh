@@ -1,5 +1,5 @@
 #!/bin/bash
-cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null
+# Change working directory; script location || home directory
 if (( $EUID != 0 )); then SUDO='sudo'; fi
 
 # Install packages
